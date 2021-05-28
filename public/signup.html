@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="StyleSheet" href="./css/jpetstore.css" type="text/css"
+	media="screen" />
+
+<meta name="generator"
+	content="HTML Tidy for Linux/x86 (vers 1st November 2002), see www.w3.org" />
+<title>JPetStore Demo</title>
+<meta content="text/html; charset=windows-1252"
+	http-equiv="Content-Type" />
+<meta http-equiv="Cache-Control" content="max-age=0" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="Pragma" content="no-cache" />
+</head>
+
+<body>
+
+<div id="Header"></div>
+
+
+<div id="Content">
+
+    <div id="Catalog">
+        
+        <form method="post" onsubmit="return signup();"> 
+
+        <div id="registration-message"></div>
+        
+        <h3>User Information</h3>
+    
+        <table>
+            <tr>
+                <td>User ID:</td>
+                <td><input name="username" type="text" /></td>
+            </tr>
+            <tr>
+                <td>New password:</td>
+                <td><input name="password" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Repeat password:</td>
+                <td><input name="repeatedPassword" type="text" /></td>
+            </tr>
+        </table>
+    
+        
+        <h3>Account Information</h3>
+        
+        <table>
+            <tr>
+                <td>First name:</td>
+                <td><input name="account.firstName" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input name="account.lastName" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input size="40" name="account.email" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input name="account.phone" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td><input size="40" name="account.address1" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td><input size="40" name="account.address2" type="text" /></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input name="account.city" type="text" /></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td><input size="10" name="account.state" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td><input size="10" name="account.zip" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td><input size="15" name="account.country" type="text" /></td>
+            </tr>
+        </table>
+        
+        <h3>Profile Information</h3>
+        
+        <table>
+            <tr>
+                <td>Language Preference:</td>
+                <td><select name="account.languagePreference">
+                    <option value="english">english</option><option value="japanese">japanese</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Favourite Category:</td>
+                <td><select name="account.favouriteCategoryId">
+                    <option value="FISH">FISH</option><option value="DOGS">DOGS</option><option value="REPTILES">REPTILES</option><option value="CATS">CATS</option><option value="BIRDS">BIRDS</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Enable MyList</td>
+                <td><input name="account.listOption" type="checkbox" value="true" /></td>
+            </tr>
+            <tr>
+                <td>Enable MyBanner</td>
+                <td><input name="account.bannerOption" type="checkbox" value="true" /></td>
+            </tr> 
+        </table> 
+
+        <input name="newAccount" type="submit" value="Save Account Information" />
+
+        <br/><br/>
+
+        <div>Used https://randomuser.me/api/</div>
+    </div>
+
+
+</div>
+
+<div id="Footer"></div> 
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/js.cookie.js"></script> 
+<script src="js/jquery.cookie.js"></script>   
+<script src="js/jquery.query-object.js"></script>
+<script src="js/petstore.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $.ajaxSetup({
+            contentType: "application/json; charset=utf-8"
+        }); 
+
+        console.log("Loading components for index.html");
+        $("#Header").load("topbar.html"); 
+        $("#Footer").load("footer.html");
+        
+        
+        var user = $.getJSON('https://randomuser.me/api/' , function (data) {
+            if (data != null) {
+                result = data.results[0];    
+                $("[name='username']").val(result.login.username);
+                $("[name='password']").val('j2ee');
+                $("[name='repeatedPassword']").val('j2ee');
+                $("[name='account.firstName']").val(result.name.first);
+                $("[name='account.lastName']").val(result.name.last);
+                $("[name='account.email']").val(result.email);
+                $("[name='account.phone']").val(result.phone);
+                $("[name='account.address1']").val(result.location.street.name);
+                $("[name='account.address2']").val(result.location.street.number);
+                $("[name='account.city']").val(result.location.city);
+                $("[name='account.state']").val(result.location.state);
+                $("[name='account.zip']").val(result.location.postcode);
+                $("[name='account.country']").val(result.location.country);  
+            }
+        }); 
+    })
+
+
+</script>
+
+</body>
+</html>
+

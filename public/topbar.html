@@ -1,0 +1,85 @@
+<!-- *** TOPBAR ***
+_________________________________________________________ -->
+<div id="Logo">
+    <div id="LogoContent">
+        <a href="/shop.html"><img src="../images/logo-topbar.gif" /></a>
+    </div>
+</div>
+
+<div id="Menu">
+
+
+    <div id="MenuContent">
+        <a href="/cart.html"><img align="middle" name="img_cart" src="../images/cart.gif" /></a> <img align="middle" src="../images/separator.gif" />  
+        <span id="logout" style="display:none"><a href="javascript:logout()">Sign Out</a> <img align="middle" src="../images/separator.gif" /> <a href="/account.html">My Account</a> <img align="middle" src="../images/separator.gif" /> </span>
+        <span id="login" style="display:none"><a href="/signon.html">Sign In</a> <img align="middle" src="../images/separator.gif" /></span> 
+         <a href="/help.html">?</a>  
+    </div>
+</div>
+
+<div id="Search">
+    <div id="SearchContent">
+        <form method="get" action="/search.html">
+            <input size="14" name="keyword" type="text" />
+            <input type="submit" value="Search" /> 
+        </form>
+    </div>
+</div>
+
+<div id="QuickLinks"></div>  
+
+<!-- *** TOP BAR END *** -->
+
+<script>
+
+    $(document).ready(function () {
+        $.ajaxSetup({
+            contentType: "application/json; charset=utf-8"
+        });
+
+
+        var category = $.getJSON('/categories', {size: 10}, function (data) {
+            if (data != null) {
+                $.each(data, function (index, element) {
+                    $('#QuickLinks').append(
+                            ' <a href="/category.html?categoryId=' + element.Catid + '">' + element.Image + '</a> '  
+                    );
+                    if(index < 4) $('#QuickLinks').append('<img src="../images/separator.gif" /> ')
+                     
+                    $('#SidebarContent').append(
+                            ' <a href="/category.html?categoryId=' + element.Catid + '">' + element.BanImg + '</a> <br /> ' + element.Descn + ' <br /> '  
+                    );  
+                }); 
+
+            }
+        });
+
+        if ($.cookie('logged_in') != null && $.cookie('logged_in') != "") { 
+            username($.cookie('logged_in'), function (username) {
+                console.log(username);
+                if (typeof username !== 'undefined') {
+                    $("#login").remove();
+                    $("#register").remove();
+                    $("#WelcomeContent").append('Welcome ' + username + '!').hide().fadeIn(200); 
+                    $("#logout").hide().fadeIn(200);
+
+                    $.getJSON('/banners/random',  function (banner) {
+                    //$.getJSON('/banners/' + json.profile.favcategory , function (banner) {
+                        if (banner != null) {
+                                $('#Banner').html(banner.bannername);
+                        }
+                    });
+                } else {
+                    $("#login").show()
+                    $("#howdy").remove()
+                    $("#logout").remove()
+                }
+            });
+        } else {
+            $("#login").show()
+            $("#howdy").remove()
+            $("#logout").remove()
+        }
+        
+    })
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="StyleSheet" href="./css/jpetstore.css" type="text/css"
+	media="screen" />
+
+<meta name="generator"
+	content="HTML Tidy for Linux/x86 (vers 1st November 2002), see www.w3.org" />
+<title>JPetStore Demo</title>
+<meta content="text/html; charset=utf-8"
+	http-equiv="Content-Type" />
+<meta http-equiv="Cache-Control" content="max-age=0" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="Pragma" content="no-cache" />
+</head>
+
+<body>
+
+<div id="Header"></div>
+
+<div id="Content">  
+    <div id="Welcome">
+        <div id="WelcomeContent"></div>
+    </div>
+
+    <div id="Main">
+        <div id="Sidebar">
+            <div id="SidebarContent"> 
+            </div>
+        </div>
+
+        <div id="MainImage">
+            <div id="MainImageContent">
+            <map name="estoremap">
+                <area alt="Birds" coords="72,2,280,250"
+                    href="/category.html?categoryId=FISH" shape="RECT" />
+                <area alt="Fish" coords="2,180,72,250"
+                    href="/category.html?categoryId=FISH" shape="RECT" />
+                <area alt="Dogs" coords="60,250,130,320"
+                    href="/category.html?categoryId=DOGS" shape="RECT" />
+                <area alt="Reptiles" coords="140,270,210,340"
+                    href="/category.html?categoryId=REPTILES" shape="RECT" />
+                <area alt="Cats" coords="225,240,295,310"
+                    href="/category.html?categoryId=CATS" shape="RECT" />
+                <area alt="Birds" coords="280,180,350,250"
+                    href="/category.html?categoryId=BIRDS" shape="RECT" />
+            </map> 
+            <img height="355" src="../images/splash.gif" align="middle"
+                usemap="#estoremap" width="350" />
+            </div>
+        </div>
+
+        <div id="Separator">&nbsp;</div>
+    </div>  
+</div>
+
+<div id="Footer"></div>
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/js.cookie.js"></script> 
+<script src="js/jquery.cookie.js"></script>   
+<script src="js/jquery.query-object.js"></script>
+<script src="js/petstore.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $.ajaxSetup({
+            contentType: "application/json; charset=utf-8"
+        });
+
+        console.log("Loading components for index.html");
+        $("#Header").load("topbar.html");  
+        $("#Footer").load("footer.html"); 
+ 
+    })
+</script>
+
+</body>
+</html>
+
